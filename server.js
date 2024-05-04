@@ -6,6 +6,7 @@ import feedbackRoutes from './routes/feedbacks.js';
 import adminRoutes from './routes/adminRoute.js';
 import categoriesRoutes from './routes/categoriesRoute.js';
 import designRoutes from './routes/designRoute.js';
+import cors from 'cors';
 import db from './configuration/db.js'; 
 const app = express();
 
@@ -13,7 +14,13 @@ const app = express();
 // Middleware
 app.use(express.json());
 dotenv.config();
-
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 200
+ }
+ ));
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
